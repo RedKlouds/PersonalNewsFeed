@@ -1,11 +1,14 @@
 package com.lydanny.personalnewsfeed;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 /**
@@ -30,6 +33,7 @@ public class FingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     //cancellationSignal Object used to get callbacks from user action
     private CancellationSignal cancallationSignal;
     private Context appContext;
+
     /**
      * Function Default Constructor
      * Description: called to setup the current app context
@@ -99,7 +103,6 @@ public class FingerPrintHandler extends FingerprintManager.AuthenticationCallbac
         Toast.makeText(appContext,
                 "Authentication Failed. " ,
                 Toast.LENGTH_LONG).show();
-
     }
     /**
      * Function:
@@ -116,6 +119,12 @@ public class FingerPrintHandler extends FingerprintManager.AuthenticationCallbac
         Toast.makeText(appContext,
                 "Authentication succeeded.",
                 Toast.LENGTH_LONG).show();
+        Intent toMainActivity = new Intent(appContext, MainActivity.class);
+        appContext.startActivity(toMainActivity);
+
+
+
+
     }
 
 }
