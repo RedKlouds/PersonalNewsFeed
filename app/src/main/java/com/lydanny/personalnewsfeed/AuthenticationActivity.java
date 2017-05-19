@@ -1,8 +1,5 @@
 package com.lydanny.personalnewsfeed;
-/*
-Danny Ly
-Redkouds
- */
+
 import android.Manifest;
 import android.app.KeyguardManager;
 import android.content.pm.PackageManager;
@@ -30,6 +27,25 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
+/**
+ *----------------------------------------------|
+ *  Project Name: Personal News Feed            |
+ *  File Name: AuthenticationActivity.java      |
+ *  AUTHOR: Danny Ly | RedKlouds                |
+ *  Created On: 5/19/2017                       |
+ *----------------------------------------------|
+ *
+ * Class Description:
+ *  -> This class is called to initialize the presentation of the processes for
+ *  fingerprint authentication, during the time of fingerprint Authentication,
+ *  there will be many call backs from the fingerprint manager class, therefore
+ *  be must handle them here.
+ *
+ * Assumptions:
+ *  -> Prior to calling or making this object, CryptoKey has been created by
+ *  AuthenticationActivity.
+ **/
+
 //requirments need device to register at least a pin,pattern or password
 public class AuthenticationActivity extends AppCompatActivity {
     //key name to be stored within the android keystore container
@@ -48,6 +64,12 @@ public class AuthenticationActivity extends AppCompatActivity {
     private FingerprintManager.CryptoObject _cryptoObject;
 
 
+    /*  Function:
+        Description:
+        PRECONDITION:
+        POSTCONDITION:
+        ASSUMPTIONS:
+     */
     /*
         Function:
         Description:
@@ -55,7 +77,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         POSTCONDITION:
         ASSUMPTIONS:
      */
-    /*
+    /**
         Function: onCreate
         Description: called when this activity is called upon(like main for individual files)
             -> initializes the view for this class and instantiates objects.
@@ -73,7 +95,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         ASSUMPTIONS:
             -> User has enrolled in at least 1 fingerprint within the system manually
             -> user has a keyguard, password/pin/pattern(backup)
-     */
+     **/
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //present the layout when this class is called.
@@ -118,15 +140,22 @@ public class AuthenticationActivity extends AppCompatActivity {
         //call to generate the key
         generateKey();
         //if the cipher is successful then make a CryptoObject
+        //if the cipher has been initialized then we also make a FingerPrintHandler
+        //object and begin the fingerprint authentication process
         if( cipherInit()){
             //given our generated _cipher make a crypto object from it
             _cryptoObject = new FingerprintManager.CryptoObject(_cipher);
+            //create the instance of FingerprintHandler here
+            // only parameter is a context, in which THIS context is used.
+            FingerPrintHandler helper = new FingerPrintHandler(this);
+            //call the method startAuth to begin the authentication process
+            helper.startAuth(fingerprintManager,_cryptoObject);
         }
 
     }
 
 
-    /*
+    /**
     Function getKeyStore
     Description:
         -> Inorder to get a generation of the encrypted key we need to gain access to
@@ -149,7 +178,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         }
     }
 
-    /*
+    /**
     Function GenerateKey
     Description: This method initializes and get's the keygenerator
     given the name of keystore container(AndroidKeyStore) and type of key to be generated
@@ -169,7 +198,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             throw new RuntimeException("Failed to get keygenerator instance", e);
         }
     }
-    /*
+    /**
     Function GenerateKey
     Description:
         -> Generate the key from the keystore given the specific configurations
@@ -212,7 +241,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         }
     }
 
-    /*
+    /**
     Function ciperInit
     Description:
         -> initializes a cipher that will create a encrypted FingerprintManger.CryptoObject

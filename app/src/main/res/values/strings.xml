@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Personal News Feed</string>
-    <string name="touch_sensor">Touch Sensor</string>
+    <string name="touch_sensor">Please use Touch Scanner to Authenticate</string>
     <string name="redklouds_inc">RedKlouds Inc</string>
 </resources>
