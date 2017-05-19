@@ -63,20 +63,13 @@ public class AuthenticationActivity extends AppCompatActivity {
     // The Crypto Object to use as authentication encrypt/decrypt fingerprint
     private FingerprintManager.CryptoObject _cryptoObject;
 
-
     /*  Function:
         Description:
         PRECONDITION:
         POSTCONDITION:
         ASSUMPTIONS:
      */
-    /*
-        Function:
-        Description:
-        PRECONDITION:
-        POSTCONDITION:
-        ASSUMPTIONS:
-     */
+
     /**
         Function: onCreate
         Description: called when this activity is called upon(like main for individual files)
@@ -153,7 +146,6 @@ public class AuthenticationActivity extends AppCompatActivity {
         }
 
     }
-
 
     /**
     Function getKeyStore

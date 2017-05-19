@@ -27,9 +27,9 @@ import android.widget.Toast;
  **/
 
 public class FingerPrintHandler extends FingerprintManager.AuthenticationCallback{
+    //cancellationSignal Object used to get callbacks from user action
     private CancellationSignal cancallationSignal;
     private Context appContext;
-
     /**
      * Function Default Constructor
      * Description: called to setup the current app context
@@ -38,8 +38,6 @@ public class FingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     public FingerPrintHandler(Context context){
         appContext = context;
     }
-
-
     /**
      * Description:
      *  ->initializes the fingerprint authentication process
@@ -99,8 +97,9 @@ public class FingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     @Override
     public void onAuthenticationFailed(){
         Toast.makeText(appContext,
-                "Authentication Failed.",
+                "Authentication Failed. " ,
                 Toast.LENGTH_LONG).show();
+
     }
     /**
      * Function:
