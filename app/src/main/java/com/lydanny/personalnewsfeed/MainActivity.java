@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * ----------------------------------------------|
@@ -33,6 +34,9 @@ import java.util.HashMap;
  *
  * Assumptions:
  * -> URL Provided is valid URL, returning proper formatted JSON string
+ * todo
+ * ->add function to change the subreddit section and repopulate
+ * the list view
  **/
 public class MainActivity extends AppCompatActivity {
     //url from which we are going to make the HTTP GET requets
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     //for our listview adapter a array of hashmaps, which hashmaps hold <k,v> of also
     //type string.
 
+    private ListView listView2;
     ArrayList<HashMap<String,String>> dataFeedList;
     /**
      *Function: MainActivity.onCreate
@@ -68,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         //make the nessecary references to view objects here
         listView = (ListView)findViewById(R.id.main_content_list);
+        listView2 = (ListView)findViewById(R.id.main_content_list_2);
         new GetContacts().execute();
     }
 
@@ -153,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
 
                         temp_data_map.put("title",title);
                         temp_data_map.put("url", url);
-                        temp_data_map.put("date","\t" + date + " ");
-                        temp_data_map.put("score","Votes: " + score + " |");
-                        temp_data_map.put("num_comments"," " + num_comments + " comments |");
+                        temp_data_map.put("date","  " + date + " ");
+                        temp_data_map.put("score","Votes: " + score + "   | ");
+                        temp_data_map.put("num_comments"," " + num_comments + " comments   | ");
                         //addm each child hashmap to datafeedList
                         dataFeedList.add(temp_data_map);
                         Log.d("ARRAY", temp_data_map.toString());
@@ -215,7 +221,10 @@ public class MainActivity extends AppCompatActivity {
                     }
             );
             //attach the adapter to the list view object
+            //listView->listItem->mainview
             listView.setAdapter(adapter);
+
+            listView2.setAdapter(adapter);
         }
     }
 }

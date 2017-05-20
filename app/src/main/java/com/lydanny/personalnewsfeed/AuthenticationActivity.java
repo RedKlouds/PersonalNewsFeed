@@ -91,7 +91,38 @@ public class AuthenticationActivity extends AppCompatActivity {
         keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
         //instantiate the fingerprint manager ask for the fingerprint service
         fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+        //checks if device qualifies
+        deviceIsApplicable();
+        //call to generate the key
+        generateKey();
+        //if the cipher is successful then make a CryptoObject
+        //if the cipher has been initialized then we also make a FingerPrintHandler
+        //object and begin the fingerprint authentication process
+        if( cipherInit()){
+            //given our generated _cipher make a crypto object from it
+            _cryptoObject = new FingerprintManager.CryptoObject(_cipher);
+            //create the instance of FingerprintHandler here
+            // only parameter is a context, in which THIS context is used.
+            FingerPrintHandler helper = new FingerPrintHandler(this);
+            //call the method startAuth to begin the authentication process
+            helper.startAuth(fingerprintManager,_cryptoObject);
 
+        }
+
+    }
+
+    /**
+     * Function: Helper deviceIsApplicable
+     * Description: Check wether the device is configured for
+     * finger print authentication
+     * PRECONDITION:
+     *  ->None
+     * POSTCONDITION:
+     *  ->returns to exit onCreate(caller) if none of the conditions are met
+     * ASSUMPTIONS:
+     *  -> User has registered some form of back up(pin,password,pattern)
+     */
+    private void deviceIsApplicable(){
         //check wether device has a backup pin, pattern, or password
         if(!keyguardManager.isKeyguardSecure()){
             //show user an error,
@@ -119,21 +150,6 @@ public class AuthenticationActivity extends AppCompatActivity {
                     "Register at least one fingerprint in Settings",
                     Toast.LENGTH_LONG).show();
             return;
-        }
-        //call to generate the key
-        generateKey();
-        //if the cipher is successful then make a CryptoObject
-        //if the cipher has been initialized then we also make a FingerPrintHandler
-        //object and begin the fingerprint authentication process
-        if( cipherInit()){
-            //given our generated _cipher make a crypto object from it
-            _cryptoObject = new FingerprintManager.CryptoObject(_cipher);
-            //create the instance of FingerprintHandler here
-            // only parameter is a context, in which THIS context is used.
-            FingerPrintHandler helper = new FingerPrintHandler(this);
-            //call the method startAuth to begin the authentication process
-            helper.startAuth(fingerprintManager,_cryptoObject);
-
         }
 
     }
