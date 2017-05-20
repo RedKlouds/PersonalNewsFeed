@@ -19,7 +19,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Symbol"
         android:id="@+id/finviz_symbol"
-        android:layout_marginEnd="43dp"
+        android:layout_marginEnd="21dp"
         android:layout_above="@+id/finviz_volume"
         android:layout_alignParentEnd="true" />
 
