@@ -9,6 +9,8 @@ Reddit Stock disscussions | Displays the latest and hottest stock disscussions o
 Finviz trending data | Features finviz API I developed to show the current trending stocks and their respective Signals
 
 ## screen shots
+Icon View
+![Icon View](http://i.imgur.com/UI6eDxu.png)
 Login Activity
 ![alt text](http://i.imgur.com/dFsE433.png)
 Main Content Activity
