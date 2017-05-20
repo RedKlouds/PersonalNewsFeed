@@ -9,9 +9,8 @@ Reddit Stock disscussions | Displays the hottest stock reddit disscussions
 Finviz trending data | Finviz API gets and returns the hottest trending stocks given 15 different categories. 
 custom Server endpoint | Server processes and sorts for the hottest stocks and returns data to individual app calls
 ## screen shots
-Icon View
-![Icon View](http://i.imgur.com/UI6eDxu.png)
+
 Login Activity
-![alt text](http://i.imgur.com/dFsE433.png)
+![alt text](http://i.picresize.com/images/2017/05/20/Np1LK.png)
 Main Content Activity
-![Main Content View](http://i.imgur.com/sHiFbTz.png)
+![Main Content View](http://i.picresize.com/images/2017/05/20/675wt.png)
