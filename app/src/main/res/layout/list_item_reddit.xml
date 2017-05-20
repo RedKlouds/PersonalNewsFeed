@@ -3,7 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="10sp"
-    android:paddingBottom="10sp">
+    android:paddingBottom="10sp"
+    android:id="@+id/list_item">
 
     <TextView
         android:layout_width="match_parent"
@@ -20,7 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NnumComments"
+        android:text="number_comments"
 
         android:id="@+id/listing_num_comments"
         android:textSize="12sp"
@@ -31,7 +32,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="date"
+        android:text="listing_date"
         android:id="@+id/listing_date"
 
         android:layout_below="@+id/listing_title"
@@ -42,7 +43,7 @@
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="num votes"
+        android:text="number_votes"
         android:id="@+id/listing_num_votes"
         android:textSize="12sp"
         android:textIsSelectable="false"

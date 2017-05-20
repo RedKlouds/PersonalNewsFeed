@@ -5,9 +5,12 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +18,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * ----------------------------------------------|
@@ -47,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
     //for our listview adapter a array of hashmaps, which hashmaps hold <k,v> of also
     //type string.
 
-    private ListView listView2;
+    private ListView listViewFinviz;
     ArrayList<HashMap<String,String>> dataFeedList;
+    ArrayList<HashMap<String,String>> dataFeedList_finviz;
     /**
      *Function: MainActivity.onCreate
      * Description: called upon creation of this class
@@ -70,12 +73,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //initialize the arraylist
         dataFeedList = new ArrayList<>();
+        dataFeedList_finviz = new ArrayList<>();
 
         //make the nessecary references to view objects here
         listView = (ListView)findViewById(R.id.main_content_list);
-        listView2 = (ListView)findViewById(R.id.main_content_list_2);
+        listViewFinviz = (ListView)findViewById(R.id.main_content_list_2);
         new GetContacts().execute();
+
+        /**
+         * This is called when a list item in listview 2 is clicked
+         * todo
+         * Implmement a detailed item list , to display the list data
+         * furthur
+         */
+        listViewFinviz.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView t = (TextView) view.findViewById(R.id.listing_title);
+                String text = t.getText().toString();
+                Log.d("CLICK @@@@@@", "DATA : " +  text);
+                Log.d("CLICKED @@@@@@@", "Clicked at positon : " + position);
+
+            }
+        });
     }
+
+
 
     /**
      *
@@ -132,6 +155,31 @@ public class MainActivity extends AppCompatActivity {
             if(jsonString != null){
                 try{
                     JSONObject jsonObj = new JSONObject(jsonString);
+                    //get the finvi array, since finviz KEY , has an value
+                    //of TYPE ARRAY
+                    JSONArray finviz_dict = jsonObj.getJSONArray("finviz");
+
+                    for(int i =0; i <finviz_dict.length(); i++){
+                        //parse the array for each dictionary element and store its
+                        //contents
+
+                        JSONObject finviz_stock_item =  finviz_dict.getJSONObject(i);
+
+                        String symbol = finviz_stock_item.getString("index");
+                        String signal = finviz_stock_item.getString("signal");
+                        String price = finviz_stock_item.getString("price");
+                        String change = finviz_stock_item.getString("change");
+                        String volume = finviz_stock_item.getString("volume");
+
+
+                        HashMap<String,String> temp_finviz_map = new HashMap<>();
+                        temp_finviz_map.put("symbol", symbol);
+                        temp_finviz_map.put("signal", signal);
+                        temp_finviz_map.put("price","$" + price);
+                        temp_finviz_map.put("change","$" + change);
+                        temp_finviz_map.put("volume","Volume: " + volume);
+                        dataFeedList_finviz.add(temp_finviz_map);
+                    }
 
                     //get the json dictionary from Reddit post
                     JSONArray reddit_dict = jsonObj.getJSONArray("reddit");
@@ -206,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
             ListAdapter adapter = new SimpleAdapter(
                     MainActivity.this,
                     dataFeedList,
-                    R.layout.list_item,
+                    R.layout.list_item_reddit,
                     new String[]{
                             "title",
                             "score",
@@ -220,11 +268,35 @@ public class MainActivity extends AppCompatActivity {
                             R.id.listing_date
                     }
             );
+            //list adapter for finviz data
+            ListAdapter adapter_finviz = new SimpleAdapter(
+                    MainActivity.this,
+                    dataFeedList_finviz,
+                    R.layout.list_item_finviz,
+                    new String[]{
+                            "signal",
+                            "symbol",
+                            "volume",
+                            "change",
+                            "price"
+                    }
+                    ,
+                    new int[]{
+                            R.id.finviz_signal,
+                            R.id.finviz_symbol,
+                            R.id.finviz_volume,
+                            R.id.finviz_change,
+                            R.id.finviz_price
+                    }
+            );
             //attach the adapter to the list view object
             //listView->listItem->mainview
             listView.setAdapter(adapter);
 
-            listView2.setAdapter(adapter);
+            listViewFinviz.setAdapter(adapter_finviz);
+
+
         }
     }
+
 }
