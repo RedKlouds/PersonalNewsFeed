@@ -124,24 +124,7 @@ public class MainActivity extends AppCompatActivity {
             if(jsonString != null){
                 try{
                     JSONObject jsonObj = new JSONObject(jsonString);
-                    //getting JSON ARRAY
-                    //{
-                        // <fourmName> : {
-                                            //[
-                                                //{
-                                                    //title:title,
-                                                    // url:url,
-                                                    // num_vote,
-                                                    // ..
-                                                    // ..
-                                                //},
-                                                //{
-                                                    //title:title,
-                                                    //..
-                                                    //..
-                                                //}
-                                            //]
-                                        //}
+       
                     //get the json dictionary from Reddit post
                     JSONArray reddit_dict = jsonObj.getJSONArray("reddit");
                     //iterate through the array, that the key 'reddit' is holding
