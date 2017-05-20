@@ -106,9 +106,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             FingerPrintHandler helper = new FingerPrintHandler(this);
             //call the method startAuth to begin the authentication process
             helper.startAuth(fingerprintManager,_cryptoObject);
-
         }
-
     }
 
     /**

@@ -12,8 +12,8 @@ import java.net.URL;
 
 /**
  * ----------------------------------------------|
- * Project Name: Personal News Feed
- * File Name: HttpHandler.java
+ * Project Name: Personal News Feed              |
+ * File Name: HttpHandler.java                   |
  * AUTHOR: Danny Ly | RedKlouds                  |
  * Created On: 5/19/2017                         |
  * ----------------------------------------------|
@@ -34,19 +34,19 @@ public class HttpHandler {
 
     /**
      * Function: makeServiceCall
-     * Description: creates a GET REquests to the HTTP provided location, using
+     * Description: creates a GET Requests to the HTTP provided location, using
      * an InputStream buffer
      * PRECONDITIONS:
      *  ->STRING URL
      * @param requestUrl
      * POSTCONDITION:
-     *  ->Returns a string that repersents a JSON string of the data
+     *  ->Returns a string that represents a JSON string of the data
      * @return
      * ASSUMPTIONS:
-     *  convertStreamToString has been properly configured and implemented
+     *  ->convertStreamToString has been properly configured and implemented
      */
     public String makeServiceCall(String requestUrl){
-        //set our defaulse resones to null
+        //set our defaults response to null
         String response = null;
         try{
             //make a url object from the given string parameter
@@ -78,7 +78,7 @@ public class HttpHandler {
      * @param inputStream
      * @return
      * POSTCONDITION:
-     * returns the String repersentation of our given buffer input
+     * ->returns the String repersentation of our given buffer input
      */
     private String convertStreamToString(InputStream inputStream){
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));

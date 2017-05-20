@@ -22,8 +22,8 @@ import java.util.HashMap;
 
 /**
  * ----------------------------------------------|
- * Project Name: Personal News Feed
- * File Name:   MainActivity.java
+ * Project Name: Personal News Feed              |
+ * File Name:   MainActivity.java                |
  * AUTHOR: Danny Ly | RedKlouds                  |
  * Created On: 5/19/2017                         |
  * ----------------------------------------------|
@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         //initialize the arraylist
         dataFeedList = new ArrayList<>();
         dataFeedList_finviz = new ArrayList<>();
-
         //make the nessecary references to view objects here
         listViewReddit = (ListView) findViewById(R.id.main_content_list);
         ListViewFinviz = (ListView)findViewById(R.id.main_content_list_2);
@@ -90,11 +89,7 @@ public class MainActivity extends AppCompatActivity {
         ListViewFinviz.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView t = (TextView) view.findViewById(R.id.listing_title);
-                String text = t.getText().toString();
-                Log.d("CLICK @@@@@@", "DATA : " +  text);
                 Log.d("CLICKED @@@@@@@", "Clicked at positon : " + position);
-
             }
         });
     }
