@@ -7,6 +7,10 @@
 /build
 /captures
 
+.swp
+.swo
+.un
+
 # Built application files
 *.apk
 *.ap_
