@@ -3,4 +3,6 @@
     <string name="touch_sensor">Touch Sensor</string>
     <string name="redklouds_inc">RedKlouds Inc</string>
     <string name="authenticate_with">Authenticate with</string>
+    <string name="header_1">Reddit</string>
+    <string name="header_2">Finviz</string>
 </resources>
