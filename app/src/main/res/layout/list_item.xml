@@ -7,18 +7,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/Name" />
+        android:id="@+id/Name"
+        android:textSize="22dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/email" />
+        android:id="@+id/email"
+        android:textSize="20dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/mobile" />
+        android:id="@+id/mobile"
+        android:textSize="20dp"
+        android:textIsSelectable="false" />
     <!-- Used to design/Render individual list items -->
 </LinearLayout>

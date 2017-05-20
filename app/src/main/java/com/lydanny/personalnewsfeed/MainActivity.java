@@ -28,6 +28,7 @@ import java.util.HashMap;
  *  after login authentication has been made. Once presented
  *  This class also makes the HTTP GET requests to the webservice for
  *  JSON data, once the data has been gather, present them in a listview
+ *  -> This is the main content view, after authentication,
  *
  * Assumptions:
  * -> URL Provided is valid URL, returning proper formatted JSON string
@@ -124,6 +125,42 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     JSONObject jsonObj = new JSONObject(jsonString);
                     //getting JSON ARRAY
+                    //{
+                        // <fourmName> : {
+                                            //[
+                                                //{
+                                                    //title:title,
+                                                    // url:url,
+                                                    // num_vote,
+                                                    // ..
+                                                    // ..
+                                                //},
+                                                //{
+                                                    //title:title,
+                                                    //..
+                                                    //..
+                                                //}
+                                            //]
+                                        //}
+                    //get the json dictionary from Reddit post
+                    JSONArray reddit_dict = jsonObj.getJSONArray("reddit");
+                    //iterate through the array, that the key 'reddit' is holding
+                    //reddit is a key to the value of an array of post
+                    //{'reddit':X}
+                    for(int i =0; i < reddit_dict.length(); i++){
+                        //X = [],[],[],[]
+                        //iterate through thte array that reddit value is holding
+                        //get the specific dictary at given index of i
+                        JSONObject reddit_Post = reddit_dict.getJSONObject(i);
+                        //[{X},{X},{X},{X}]
+                        //access the data within each dictionary
+
+                        String title =  reddit_Post.getString("title");
+                        String url = reddit_Post.getString("url");
+                        String date = reddit_Post.getString("date");
+                        String score = reddit_Post.getString("score");
+                        String num_comments = reddit_Post.getString("num_comments");
+                    }
                     JSONArray contacts = jsonObj.getJSONArray("contacts");
                     for(int i=0; i < contacts.length(); i++){
                         //given an index, get the elements at the index of the json

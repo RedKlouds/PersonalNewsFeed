@@ -40,13 +40,14 @@ import javax.crypto.SecretKey;
  *  fingerprint authentication, during the time of fingerprint Authentication,
  *  there will be many call backs from the fingerprint manager class, therefore
  *  be must handle them here.
- *
+
  * Assumptions:
  *  -> Prior to calling or making this object, CryptoKey has been created by
  *  AuthenticationActivity.
+ *  -> User's device has been registered at least with one or more back up
+ *  security options ( Pin, Pattern and/or Password)
  **/
 
-//requirments need device to register at least a pin,pattern or password
 public class AuthenticationActivity extends AppCompatActivity {
     //key name to be stored within the android keystore container
     private static final String KEY_NAME = "Redklouds_Key";
@@ -62,13 +63,6 @@ public class AuthenticationActivity extends AppCompatActivity {
     private Cipher _cipher;
     // The Crypto Object to use as authentication encrypt/decrypt fingerprint
     private FingerprintManager.CryptoObject _cryptoObject;
-
-    /*  Function:
-        Description:
-        PRECONDITION:
-        POSTCONDITION:
-        ASSUMPTIONS:
-     */
 
     /**
         Function: onCreate
@@ -98,11 +92,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         //instantiate the fingerprint manager ask for the fingerprint service
         fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
-        /*
-        //checks wether the device is secured with a PIN,Pattern, and/or Password
-        //ensure backup screen unlocking method has been configured
-        //this mainly checks for backup security on device has been setup
-        */
+        //check wether device has a backup pin, pattern, or password
         if(!keyguardManager.isKeyguardSecure()){
             //show user an error,
             Toast.makeText(this,
@@ -248,7 +238,6 @@ public class AuthenticationActivity extends AppCompatActivity {
         -> Cipher is initialized
      ASSUMPTIONS:
         -> generateKey was called to initialize _KeyStore
-
  */
     public boolean cipherInit(){
         try {

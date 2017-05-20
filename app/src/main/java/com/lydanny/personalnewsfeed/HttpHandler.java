@@ -9,12 +9,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
 
 /**
  * ----------------------------------------------|
  * Project Name: Personal News Feed
- * File Name:
+ * File Name: HttpHandler.java
  * AUTHOR: Danny Ly | RedKlouds                  |
  * Created On: 5/19/2017                         |
  * ----------------------------------------------|

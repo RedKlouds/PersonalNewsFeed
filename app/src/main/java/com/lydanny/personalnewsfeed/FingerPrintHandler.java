@@ -1,14 +1,12 @@
 package com.lydanny.personalnewsfeed;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 /**
@@ -42,13 +40,23 @@ public class FingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     public FingerPrintHandler(Context context){
         appContext = context;
     }
+
     /**
+     * Function: FingerPrintHandler.startAuth
      * Description:
      *  ->initializes the fingerprint authentication process
      *  -> checks one more time if access has been granted for fingerprint access
      * PRECONDITIONS:
-     * @param fManager fingerprint objectmanager
-     * @param cryptoObject the cryptoObject created from AuthenticationActivity
+     *  ->Valid cryptoObject freated from AuthenticationActivity class
+     *  -> AuthenticatiopnAcitivty class was called prior to calling this function
+     *  and was successful on initalizing the following parameters
+     *    =fManager (fingerprint manager)
+     *    =cryptoOject (CryptoObject.CryptoObject)
+     * @param fManager
+     * @param cryptoObject
+     * POSTCONDITION:
+     *  -> calls authenticate from the fingerprint manager object given the cryptoObject
+     *  and checks authentication, then calls the below implemented callbacks
      */
     public void startAuth(FingerprintManager fManager,
                           FingerprintManager.CryptoObject cryptoObject){
@@ -65,10 +73,14 @@ public class FingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     }
 
     /**
+     * Function: FingerPrintHandler.onAuthenticationError
      * Description:
      *  -> when authentication has error'd
+     *  PRECONDITION:
      * @param helpMsgId
      * @param errorString
+     * POSTCONDITION:
+     *  ->None
      */
     @Override
     public void onAuthenticationError(int helpMsgId, CharSequence errorString){
@@ -78,21 +90,27 @@ public class FingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     }
 
     /**
-     * Function: OnAuthHelp
-     * Description: When user presented  with help
+     * Function: FingerPrintHandler.OnAuthHelp
+     * Description: Instance where device supports user assistant on fingerprint scanning
+     * -> example 'make sure fingerp is covering entire  scanner' messages
+     * PRECONDTION:
      * @param helpMsgId
      * @param helpString
+     * POSTCONDIITON:
+     *  ->Presents the system OS help scanner message to user
      */
     @Override
     public void onAuthenticationHelp(int helpMsgId, CharSequence helpString){
+        //make a toast to the systems original message
         Toast.makeText(appContext,
                 "Authentication help\n" + helpString,
                 Toast.LENGTH_LONG).show();
     }
 
     /**
-     * Function: onAuthFailed
-     * Description: present a failer message, and number of attempers before exiting.
+     * Function: FingerPrintHandler.onAuthFailed
+     * Description:
+     *  -> present a message on failed recognition attempt
      * PRECONDITONS:
      * -> None
      * POSTCONDITION:
@@ -104,27 +122,28 @@ public class FingerPrintHandler extends FingerprintManager.AuthenticationCallbac
                 "Authentication Failed. " ,
                 Toast.LENGTH_LONG).show();
     }
+
     /**
-     * Function:
+     * Function: FingerPrintHandler.onAuthenticationSucceed
      * Description:
      *  -> authenticaiton has been succeessful therefore we need open to our main activity
      *  PRECONDITIONS:
      * @param AuthResult
      * POSTCONDITION:
-     *  ->go to main activity
+     *  ->Handles successful fingerprint recognition, go to main view
+     * ASSUMPTIONS:
+     *  ->Correct fingerprint recognized
      */
     @Override
     public void onAuthenticationSucceeded(
             FingerprintManager.AuthenticationResult AuthResult) {
+        //present success message
         Toast.makeText(appContext,
                 "Authentication succeeded.",
                 Toast.LENGTH_LONG).show();
+        //prepare to make an intent to main view
         Intent toMainActivity = new Intent(appContext, MainActivity.class);
         appContext.startActivity(toMainActivity);
-
-
-
-
     }
 
 }

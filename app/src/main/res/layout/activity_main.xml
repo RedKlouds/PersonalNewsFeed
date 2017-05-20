@@ -10,9 +10,10 @@
     tools:context="com.lydanny.personalnewsfeed.MainActivity">
 
     <ListView
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/main_content_list"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
+    <!-- List view for the main view 'content view' -->
 </RelativeLayout>

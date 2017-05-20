@@ -4,20 +4,31 @@
 
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Allow permissions for internet to get HTTP and fingerprint for authenticaiton -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AuthenticationActivity">
+        <activity
+            android:name=".AuthenticationActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!--
+            settings for login view/authentication view
+            -> attribute to not save history, so when user trieds to press back on content view
+            app will exit
+            -->
+
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".MainActivity">
+            <!-- settings for MainActivity -->
+        </activity>
     </application>
 
 </manifest>
