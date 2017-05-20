@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10sp"
+    android:paddingBottom="10sp"
+    android:id="@+id/list_item">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:id="@+id/listing_title"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:paddingBottom="7sp"
+        android:paddingLeft="2dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="number_comments"
+
+        android:id="@+id/listing_num_comments"
+        android:textSize="12sp"
+        android:layout_alignBottom="@+id/listing_date"
+        android:layout_toEndOf="@+id/listing_num_votes"
+        android:paddingLeft="3dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="listing_date"
+        android:id="@+id/listing_date"
+
+        android:layout_below="@+id/listing_title"
+        android:layout_toEndOf="@+id/listing_num_comments"
+        android:textSize="12sp"
+        android:paddingLeft="4dp" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="number_votes"
+        android:id="@+id/listing_num_votes"
+        android:textSize="12sp"
+        android:textIsSelectable="false"
+        android:layout_gravity="center_horizontal"
+        android:layout_column="0"
+        android:layout_alignTop="@+id/listing_num_comments"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/listing_date"
+        android:paddingLeft="2dp"
+        android:paddingRight="3dp"
+         />
+
+    <!-- Used to design/Render individual list items -->
+</RelativeLayout>
